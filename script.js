@@ -75,14 +75,24 @@ function initProjectSlider() {
   
   let scrollStep = 1;
   let autoScroll;
+  let isScrollingRight = true;
   
   function startAutoScroll() {
     autoScroll = setInterval(() => {
-      slider.scrollLeft += scrollStep;
-      if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth || slider.scrollLeft <= 0) {
-        scrollStep *= -1;
+      // Check if we've reached the end or beginning
+      if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5) {
+        isScrollingRight = false;
+      } else if (slider.scrollLeft <= 5) {
+        isScrollingRight = true;
       }
-    }, 20);
+      
+      // Scroll in the appropriate direction
+      if (isScrollingRight) {
+        slider.scrollLeft += scrollStep;
+      } else {
+        slider.scrollLeft -= scrollStep;
+      }
+    }, 25); // Slightly slower for smoother scrolling
   }
   
   function stopAutoScroll() { 
@@ -92,6 +102,15 @@ function initProjectSlider() {
   slider.addEventListener('mouseover', stopAutoScroll);
   slider.addEventListener('mouseout', startAutoScroll);
   
+  // Pause auto-scroll when user interacts with the slider
+  slider.addEventListener('mousedown', stopAutoScroll);
+  slider.addEventListener('touchstart', stopAutoScroll);
+  
+  // Resume auto-scroll when user stops interacting
+  slider.addEventListener('mouseup', startAutoScroll);
+  slider.addEventListener('touchend', startAutoScroll);
+  
+  // Initialize auto-scroll
   startAutoScroll();
   console.log("Auto-scroll enabled for large screen");
 }

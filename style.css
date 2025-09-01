@@ -1,7 +1,7 @@
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
-  background: #000000; /* Changed to black */
+  background: #000000; /* Dark black background */
   color: #fff;
   overflow-x: hidden;
 }
@@ -166,7 +166,15 @@ html, body {
   background: #141414; /* Changed to #141414 */
   padding: 15px; border-radius: 15px;
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for project cards */
 }
+
+/* Project card animation */
+.project-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0, 229, 255, 0.3), 0 0 20px rgba(255, 0, 255, 0.2);
+}
+
 .project-card .btn {
   display: inline-block;
   background: #000;
