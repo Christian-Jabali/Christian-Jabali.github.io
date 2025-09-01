@@ -1,55 +1,9 @@
-// Video loaded callback
-function videoLoaded() {
-  // Video has loaded, we can potentially hide loader sooner
-  const isMobile = window.innerWidth <= 768;
-  if (isMobile) {
-    setTimeout(hideLoader, 500);
-  }
-}
-
-// Optimized loading for mobile - show content faster
-document.addEventListener('DOMContentLoaded', function() {
-  // Initialize components immediately
-  generateProjectCards();
-  initMobileMenu();
-  
-  // Load non-critical components after a short delay
-  setTimeout(initProjectSlider, 500);
-  
-  // Hide loader much sooner on mobile
-  const isMobile = window.innerWidth <= 768;
-  
-  if (isMobile) {
-    // On mobile, hide loader after shorter time (800ms max)
-    setTimeout(hideLoader, 800);
-  } else {
-    // On desktop, use normal timing
-    window.addEventListener('load', function() {
-      setTimeout(hideLoader, 1000);
-    });
-  }
-  
-  // Header background toggle on scroll
-  window.addEventListener("scroll", () => {
-    const header = document.getElementById("header");
-    if (window.scrollY > 50) header.classList.add("scrolled");
-    else header.classList.remove("scrolled");
-  });
+// Header background toggle on scroll
+window.addEventListener("scroll", () => {
+  const header = document.getElementById("header");
+  if (window.scrollY > 50) header.classList.add("scrolled");
+  else header.classList.remove("scrolled");
 });
-
-function hideLoader() {
-  const loader = document.getElementById('loader');
-  if (loader && !loader.classList.contains('hidden')) {
-    loader.classList.add('hidden');
-    
-    // Remove loader from DOM after fadeout
-    setTimeout(function() {
-      if (loader.parentNode) {
-        loader.remove();
-      }
-    }, 500);
-  }
-}
 
 // Animate Skills
 let skillsAnimated = false;
@@ -115,29 +69,20 @@ function initProjectSlider() {
   
   // Don't initialize auto-scroll for small screens
   if (isSmallScreen()) {
+    console.log("Auto-scroll disabled for small screen");
     return;
   }
   
   let scrollStep = 1;
   let autoScroll;
-  let isScrollingRight = true;
   
   function startAutoScroll() {
     autoScroll = setInterval(() => {
-      // Check if we've reached the end or beginning
-      if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5) {
-        isScrollingRight = false;
-      } else if (slider.scrollLeft <= 5) {
-        isScrollingRight = true;
+      slider.scrollLeft += scrollStep;
+      if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth || slider.scrollLeft <= 0) {
+        scrollStep *= -1;
       }
-      
-      // Scroll in the appropriate direction
-      if (isScrollingRight) {
-        slider.scrollLeft += scrollStep;
-      } else {
-        slider.scrollLeft -= scrollStep;
-      }
-    }, 25);
+    }, 20);
   }
   
   function stopAutoScroll() { 
@@ -147,16 +92,8 @@ function initProjectSlider() {
   slider.addEventListener('mouseover', stopAutoScroll);
   slider.addEventListener('mouseout', startAutoScroll);
   
-  // Pause auto-scroll when user interacts with the slider
-  slider.addEventListener('mousedown', stopAutoScroll);
-  slider.addEventListener('touchstart', stopAutoScroll);
-  
-  // Resume auto-scroll when user stops interacting
-  slider.addEventListener('mouseup', startAutoScroll);
-  slider.addEventListener('touchend', startAutoScroll);
-  
-  // Initialize auto-scroll
   startAutoScroll();
+  console.log("Auto-scroll enabled for large screen");
 }
 
 // ======== Mobile Hamburger Toggle ========
@@ -199,5 +136,14 @@ function initMobileMenu() {
   /* Close menu if screen is resized to desktop */
   window.addEventListener('resize', () => {
     if (window.innerWidth > 768) closeMenu();
+    // Reinitialize project slider when screen size changes
+    initProjectSlider();
   });
 }
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  generateProjectCards();
+  initProjectSlider();
+  initMobileMenu();
+});
