@@ -1,3 +1,18 @@
+// Show loader until everything is loaded
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    const loader = document.getElementById('loader');
+    if (loader) {
+      loader.classList.add('hidden');
+      
+      // Remove loader from DOM after fadeout
+      setTimeout(function() {
+        loader.remove();
+      }, 500);
+    }
+  }, 1000); // Minimum show time for loader
+});
+
 // Header background toggle on scroll
 window.addEventListener("scroll", () => {
   const header = document.getElementById("header");
