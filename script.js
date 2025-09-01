@@ -1,24 +1,55 @@
-// Show loader until everything is loaded
-window.addEventListener('load', function() {
-  setTimeout(function() {
-    const loader = document.getElementById('loader');
-    if (loader) {
-      loader.classList.add('hidden');
-      
-      // Remove loader from DOM after fadeout
-      setTimeout(function() {
-        loader.remove();
-      }, 500);
-    }
-  }, 1000); // Minimum show time for loader
+// Video loaded callback
+function videoLoaded() {
+  // Video has loaded, we can potentially hide loader sooner
+  const isMobile = window.innerWidth <= 768;
+  if (isMobile) {
+    setTimeout(hideLoader, 500);
+  }
+}
+
+// Optimized loading for mobile - show content faster
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize components immediately
+  generateProjectCards();
+  initMobileMenu();
+  
+  // Load non-critical components after a short delay
+  setTimeout(initProjectSlider, 500);
+  
+  // Hide loader much sooner on mobile
+  const isMobile = window.innerWidth <= 768;
+  
+  if (isMobile) {
+    // On mobile, hide loader after shorter time (800ms max)
+    setTimeout(hideLoader, 800);
+  } else {
+    // On desktop, use normal timing
+    window.addEventListener('load', function() {
+      setTimeout(hideLoader, 1000);
+    });
+  }
+  
+  // Header background toggle on scroll
+  window.addEventListener("scroll", () => {
+    const header = document.getElementById("header");
+    if (window.scrollY > 50) header.classList.add("scrolled");
+    else header.classList.remove("scrolled");
+  });
 });
 
-// Header background toggle on scroll
-window.addEventListener("scroll", () => {
-  const header = document.getElementById("header");
-  if (window.scrollY > 50) header.classList.add("scrolled");
-  else header.classList.remove("scrolled");
-});
+function hideLoader() {
+  const loader = document.getElementById('loader');
+  if (loader && !loader.classList.contains('hidden')) {
+    loader.classList.add('hidden');
+    
+    // Remove loader from DOM after fadeout
+    setTimeout(function() {
+      if (loader.parentNode) {
+        loader.remove();
+      }
+    }, 500);
+  }
+}
 
 // Animate Skills
 let skillsAnimated = false;
@@ -84,7 +115,6 @@ function initProjectSlider() {
   
   // Don't initialize auto-scroll for small screens
   if (isSmallScreen()) {
-    console.log("Auto-scroll disabled for small screen");
     return;
   }
   
@@ -107,7 +137,7 @@ function initProjectSlider() {
       } else {
         slider.scrollLeft -= scrollStep;
       }
-    }, 25); // Slightly slower for smoother scrolling
+    }, 25);
   }
   
   function stopAutoScroll() { 
@@ -127,7 +157,6 @@ function initProjectSlider() {
   
   // Initialize auto-scroll
   startAutoScroll();
-  console.log("Auto-scroll enabled for large screen");
 }
 
 // ======== Mobile Hamburger Toggle ========
@@ -170,14 +199,5 @@ function initMobileMenu() {
   /* Close menu if screen is resized to desktop */
   window.addEventListener('resize', () => {
     if (window.innerWidth > 768) closeMenu();
-    // Reinitialize project slider when screen size changes
-    initProjectSlider();
   });
 }
-
-// Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  generateProjectCards();
-  initProjectSlider();
-  initMobileMenu();
-});

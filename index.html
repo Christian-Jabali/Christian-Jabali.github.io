@@ -2,15 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>Christian Jabali | Portfolio</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
-  <!-- Preload critical assets -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
   
   <!-- Critical CSS for hero section -->
   <style>
@@ -73,6 +72,29 @@
       opacity: 0;
       pointer-events: none;
     }
+
+    /* Mobile-first optimizations */
+    @media (max-width: 768px) {
+      .hero-video {
+        transform: translateZ(0); /* Hardware acceleration */
+      }
+      
+      .hero-title {
+        font-size: 2.5rem; /* Smaller font for mobile */
+      }
+    }
+
+    /* Prevent layout shifts */
+    .about-img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+    }
+
+    /* Critical above-the-fold styles */
+    .hero, .header {
+      will-change: transform; /* Prepare browser for animations */
+    }
   </style>
 </head>
 <body>
@@ -111,7 +133,7 @@
   <!-- HERO -->
   <section class="hero" id="home">
     <!-- Optimized video with poster and preload -->
-    <video autoplay muted loop playsinline class="hero-video" preload="auto" poster="video-poster.jpg">
+    <video autoplay muted loop playsinline class="hero-video" preload="auto" poster="video-poster.jpg" onloadeddata="videoLoaded()">
       <source src="Final-product.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay">
@@ -146,117 +168,124 @@
   <section class="container skills" id="skills">
     <h2 class="section-title purple">SKILLS</h2>
     <div class="skill-circles">
-      <div class="skill" data-percent="90">
-        <svg>
-          <defs>
-            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#ff00ff" />
-              <stop offset="100%" stop-color="#00e5ff" />
-            </linearGradient>
-          </defs>
-          <circle class="bg"/>
-          <circle class="progress" stroke="url(#grad1)"/>
-        </svg>
-        <span>0%</span>
-        <p>Excel</p>
+      <!-- First row with 4 skills -->
+      <div class="skill-row">
+        <div class="skill" data-percent="90">
+          <svg>
+            <defs>
+              <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ff00ff" />
+                <stop offset="100%" stop-color="#00e5ff" />
+              </linearGradient>
+            </defs>
+            <circle class="bg"/>
+            <circle class="progress" stroke="url(#grad1)"/>
+          </svg>
+          <span>0%</span>
+          <p>Excel</p>
+        </div>
+        <div class="skill" data-percent="85">
+          <svg>
+            <defs>
+              <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ff00ff" />
+                <stop offset="100%" stop-color="#00e5ff" />
+              </linearGradient>
+            </defs>
+            <circle class="bg"/>
+            <circle class="progress" stroke="url(#grad2)"/>
+          </svg>
+          <span>0%</span>
+          <p>Power BI</p>
+        </div>
+        <div class="skill" data-percent="80">
+          <svg>
+            <defs>
+              <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ff00ff" />
+                <stop offset="100%" stop-color="#00e5ff" />
+              </linearGradient>
+            </defs>
+            <circle class="bg"/>
+            <circle class="progress" stroke="url(#grad3)"/>
+          </svg>
+          <span>0%</span>
+          <p>SQL</p>
+        </div>
+        <div class="skill" data-percent="75">
+          <svg>
+            <defs>
+              <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ff00ff" />
+                <stop offset="100%" stop-color="#00e5ff" />
+              </linearGradient>
+            </defs>
+            <circle class="bg"/>
+            <circle class="progress" stroke="url(#grad4)"/>
+          </svg>
+          <span>0%</span>
+          <p>Python</p>
+        </div>
       </div>
-      <div class="skill" data-percent="85">
-        <svg>
-          <defs>
-            <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#ff00ff" />
-              <stop offset="100%" stop-color="#00e5ff" />
-            </linearGradient>
-          </defs>
-          <circle class="bg"/>
-          <circle class="progress" stroke="url(#grad2)"/>
-        </svg>
-        <span>0%</span>
-        <p>Power BI</p>
-      </div>
-      <div class="skill" data-percent="80">
-        <svg>
-          <defs>
-            <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#ff00ff" />
-              <stop offset="100%" stop-color="#00e5ff" />
-            </linearGradient>
-          </defs>
-          <circle class="bg"/>
-          <circle class="progress" stroke="url(#grad3)"/>
-        </svg>
-        <span>0%</span>
-        <p>SQL</p>
-      </div>
-      <div class="skill" data-percent="75">
-        <svg>
-          <defs>
-            <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#ff00ff" />
-              <stop offset="100%" stop-color="#00e5ff" />
-            </linearGradient>
-          </defs>
-          <circle class="bg"/>
-          <circle class="progress" stroke="url(#grad4)"/>
-        </svg>
-        <span>0%</span>
-        <p>Python</p>
-      </div>
-      <div class="skill" data-percent="70">
-        <svg>
-          <defs>
-            <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#ff00ff" />
-              <stop offset="100%" stop-color="#00e5ff" />
-            </linearGradient>
-          </defs>
-          <circle class="bg"/>
-          <circle class="progress" stroke="url(#grad5)"/>
-        </svg>
-        <span>0%</span>
-        <p>Google Apps Script</p>
-      </div>
-      <div class="skill" data-percent="95">
-        <svg>
-          <defs>
-            <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#ff00ff" />
-              <stop offset="100%" stop-color="#00e5ff" />
-            </linearGradient>
-          </defs>
-          <circle class="bg"/>
-          <circle class="progress" stroke="url(#grad6)"/>
-        </svg>
-        <span>0%</span>
-        <p>Communication</p>
-      </div>
-      <div class="skill" data-percent="90">
-        <svg>
-          <defs>
-            <linearGradient id="grad7" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#ff00ff" />
-              <stop offset="100%" stop-color="#00e5ff" />
-            </linearGradient>
-          </defs>
-          <circle class="bg"/>
-          <circle class="progress" stroke="url(#grad7)"/>
-        </svg>
-        <span>0%</span>
-        <p>Problem-Solving</p>
-      </div>
-      <div class="skill" data-percent="85">
-        <svg>
-          <defs>
-            <linearGradient id="grad8" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#ff00ff" />
-              <stop offset="100%" stop-color="#00e5ff" />
-            </linearGradient>
-          </defs>
-          <circle class="bg"/>
-          <circle class="progress" stroke="url(#grad8)"/>
-        </svg>
-        <span>0%</span>
-        <p>Adaptability</p>
+      
+      <!-- Second row with 4 skills -->
+      <div class="skill-row">
+        <div class="skill" data-percent="70">
+          <svg>
+            <defs>
+              <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ff00ff" />
+                <stop offset="100%" stop-color="#00e5ff" />
+              </linearGradient>
+            </defs>
+            <circle class="bg"/>
+            <circle class="progress" stroke="url(#grad5)"/>
+          </svg>
+          <span>0%</span>
+          <p>Google Apps Script</p>
+        </div>
+        <div class="skill" data-percent="95">
+          <svg>
+            <defs>
+              <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ff00ff" />
+                <stop offset="100%" stop-color="#00e5ff" />
+              </linearGradient>
+            </defs>
+            <circle class="bg"/>
+            <circle class="progress" stroke="url(#grad6)"/>
+          </svg>
+          <span>0%</span>
+          <p>Communication</p>
+        </div>
+        <div class="skill" data-percent="90">
+          <svg>
+            <defs>
+              <linearGradient id="grad7" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ff00ff" />
+                <stop offset="100%" stop-color="#00e5ff" />
+              </linearGradient>
+            </defs>
+            <circle class="bg"/>
+            <circle class="progress" stroke="url(#grad7)"/>
+          </svg>
+          <span>0%</span>
+          <p>Problem-Solving</p>
+        </div>
+        <div class="skill" data-percent="85">
+          <svg>
+            <defs>
+              <linearGradient id="grad8" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ff00ff" />
+                <stop offset="100%" stop-color="#00e5ff" />
+              </linearGradient>
+            </defs>
+            <circle class="bg"/>
+            <circle class="progress" stroke="url(#grad8)"/>
+          </svg>
+          <span>0%</span>
+          <p>Adaptability</p>
+        </div>
       </div>
     </div>
   </section>

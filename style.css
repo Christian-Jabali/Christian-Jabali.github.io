@@ -112,24 +112,73 @@ html, body {
   box-sizing: border-box;
   width: calc(100% - 40px);
   min-height: 470px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
 .skill-circles {
-  display: flex; flex-wrap: wrap;
-  gap: 30px; justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
-.skill { position: relative; width: 120px; height: 140px; text-align: center; }
-.skill svg { width: 120px; height: 120px; transform: rotate(-90deg); }
-.skill circle { fill: none; stroke-width: 10; r: 50; cx: 60; cy: 60; }
-.skill .bg { stroke: #333; }
+
+.skill-row {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.skill-row::-webkit-scrollbar {
+  display: none;
+}
+
+.skill { 
+  position: relative; 
+  width: 120px; 
+  height: 140px; 
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.skill svg { 
+  width: 120px; 
+  height: 120px; 
+  transform: rotate(-90deg); 
+}
+
+.skill circle { 
+  fill: none; 
+  stroke-width: 10; 
+  r: 50; 
+  cx: 60; 
+  cy: 60; 
+}
+
+.skill .bg { 
+  stroke: #333; 
+}
+
 .skill .progress {
   stroke-dasharray: 314;
   stroke-dashoffset: 314;
   stroke-linecap: round;
 }
+
 .skill span {
-  position: absolute; top: 35px; left: 0; right: 0;
-  font-weight: bold; font-size: 18px;
+  position: absolute; 
+  top: 35px; 
+  left: 0; 
+  right: 0;
+  font-weight: bold; 
+  font-size: 18px;
 }
+
 .skill p {
   margin-top: 8px;
   font-size: 14px;
@@ -205,9 +254,9 @@ html, body {
   animation: pulse 2s infinite;
 }
 @keyframes pulse {
-  0% { text-shadow: 0 0 5px #ff00ff, 0 0 10px #00e5ff; }
-  50% { text-shadow: 0 0 20px #ff00ff, 0 0 30px #00e5ff; }
-  100% { text-shadow: 0 0 5px #ff00ff, 0 0 10px #00e5ff; }
+ 0% { text-shadow: 0 0 5px #ff00ff, 0 0 10px #00e5ff; }
+ 50% { text-shadow: 0 0 20px #ff00ff, 0 0 30px #00e5ff; }
+ 100% { text-shadow: 0 0 5px #ff00ff, 0 0 10px #00e5ff; }
 }
 
 /* === HAMBURGER ICON === */
@@ -305,6 +354,114 @@ html, body {
   /* Adjust project cards for mobile */
   .project-card {
     flex: 0 0 220px;
+  }
+  
+  /* Adjust skills for mobile */
+  .skill-circles {
+    gap: 25px;
+  }
+  
+  .skill-row {
+    gap: 20px;
+    justify-content: flex-start;
+    padding-bottom: 15px;
+  }
+  
+  .skill {
+    width: 110px;
+    height: 130px;
+  }
+  
+  .skill svg {
+    width: 110px;
+    height: 110px;
+  }
+  
+  .skill span {
+    top: 32px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .skill-row {
+    gap: 15px;
+  }
+  
+  .skill {
+    width: 100px;
+    height: 120px;
+  }
+  
+  .skill svg {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .skill span {
+    top: 30px;
+    font-size: 15px;
+  }
+  
+  .skill p {
+    font-size: 13px;
+    max-width: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skill-circles {
+    gap: 20px;
+  }
+  
+  .skill-row {
+    gap: 12px;
+  }
+  
+  .skill {
+    width: 95px;
+    height: 115px;
+  }
+  
+  .skill svg {
+    width: 95px;
+    height: 95px;
+  }
+  
+  .skill span {
+    top: 28px;
+    font-size: 14px;
+  }
+  
+  .skill p {
+    font-size: 12px;
+    max-width: 85px;
+  }
+}
+
+@media (max-width: 400px) {
+  .skill-row {
+    gap: 10px;
+  }
+  
+  .skill {
+    width: 90px;
+    height: 110px;
+  }
+  
+  .skill svg {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .skill span {
+    top: 26px;
+    font-size: 13px;
+  }
+  
+  .skill p {
+    font-size: 11px;
+    max-width: 80px;
   }
 }
 
