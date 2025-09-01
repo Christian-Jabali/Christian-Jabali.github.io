@@ -1,9 +1,9 @@
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
-  background: #0d0d0d;
+  background: #000000; /* Dark black background */
   color: #fff;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-x: hidden;
 }
 
 html, body {
@@ -12,14 +12,14 @@ html, body {
 }
 
 .container {
-  background: #1a1a1a;
+  background: #141414; /* Changed to #141414 */
   border-radius: 20px;
   padding: 40px;
   margin: 60px auto;
   max-width: 1200px;
-  box-sizing: border-box; /* Include padding in width calculation */
-  width: calc(100% - 40px); /* Responsive width with margins */
-} 
+  box-sizing: border-box;
+  width: calc(100% - 40px);
+}
 
 /* HEADER */
 .header {
@@ -30,14 +30,14 @@ html, body {
   position: fixed;
   top: 0; 
   width: 100%;
-  box-sizing: border-box; /* Include padding in width calculation */
+  box-sizing: border-box;
   z-index: 100;
   transition: background 0.4s;
   background: transparent;
   left: 0;
   right: 0;
 }
-.header.scrolled { background: #1a1a1a; }
+.header.scrolled { background: #141414; } /* Changed to #141414 */
 .logo img { height: 40px; }
 .nav {
   display: flex;
@@ -104,14 +104,14 @@ html, body {
 
 /* SKILLS */
 .skills {
-  max-width: 1200px;   /* match other sections */
-  margin: 60px auto;   /* center horizontally + spacing from others */
-  background: #1a1a1a; /* same background as .container */
+  max-width: 1200px;
+  margin: 60px auto;
+  background: #141414; /* Changed to #141414 */
   border-radius: 25px;
   padding: 40px;
   box-sizing: border-box;
-  width: calc(100% - 40px); /* Responsive width with margins */
-  min-height: 470px; /* Add this line - adjust the value as needed */
+  width: calc(100% - 40px);
+  min-height: 470px;
 }
 .skill-circles {
   display: flex; flex-wrap: wrap;
@@ -134,7 +134,7 @@ html, body {
   margin-top: 8px;
   font-size: 14px;
   line-height: 1.1;
-  max-width: 100px;   /* keeps text within circle width */
+  max-width: 100px;
   margin-left: auto;
   margin-right: auto;
   word-wrap: break-word;
@@ -143,7 +143,7 @@ html, body {
 
 /* PROJECTS */
 .projects {
-  width: calc(100% - 40px); /* Responsive width with margins */
+  width: calc(100% - 40px);
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
@@ -153,20 +153,28 @@ html, body {
   gap: 20px;
   overflow-x: auto; 
   scroll-behavior: smooth;
-  padding-bottom: 5px; /* Small space at bottom */
+  padding-bottom: 5px;
   width: 100%;
-  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
-  scrollbar-width: none;  /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 .project-slider::-webkit-scrollbar {
-  display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+  display: none;
 }
 .project-card {
   flex: 0 0 250px;
-  background: #262626;
+  background: #141414; /* Changed to #141414 */
   padding: 15px; border-radius: 15px;
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for project cards */
 }
+
+/* Project card animation */
+.project-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0, 229, 255, 0.3), 0 0 20px rgba(255, 0, 255, 0.2);
+}
+
 .project-card .btn {
   display: inline-block;
   background: #000;
@@ -184,7 +192,7 @@ html, body {
 /* CONTACT */
 .contact { 
   text-align: center; 
-  width: calc(100% - 40px); /* Responsive width with margins */
+  width: calc(100% - 40px);
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
@@ -204,7 +212,7 @@ html, body {
 
 /* === HAMBURGER ICON === */
 .hamburger {
-  display: none; /* hidden on desktop */
+  display: none;
   width: 30px;
   height: 24px;
   position: relative;
@@ -259,11 +267,11 @@ html, body {
   .nav {
     position: fixed;
     top: 0;
-    right: -100%; /* hidden off-screen */
+    right: -100%;
     width: 75vw;
     max-width: 320px;
     height: 100vh;
-    background: #1a1a1a;
+    background: #141414; /* Changed to #141414 */
     display: flex;
     flex-direction: column;
     padding: 80px 24px 24px;
@@ -280,7 +288,7 @@ html, body {
     font-size: 18px;
   }
 
-  .header { z-index: 130; } /* keep header above overlay */
+  .header { z-index: 130; }
   
   /* Adjust container padding for mobile */
   .container {
